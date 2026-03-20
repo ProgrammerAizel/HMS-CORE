@@ -1,0 +1,92 @@
+<div class="container mt-4">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-7">
+            <h2 class="fw-bold text-dark">
+                <i class="bi bi-people-fill"></i> Patient Records
+            </h2>
+            <p class="text-muted">Total patients managed by your clinic</p>
+        </div>
+        <div class="col-md-5">
+            <form action="/patients/search" method="GET" class="d-flex shadow-sm">
+                <input 
+                    type="text" 
+                    name="query" 
+                    class="form-control" 
+                    placeholder="Search by name..." 
+                    value="{{searchQuery}}"
+                    required
+                >
+                <button class="btn btn-primary ms-2" type="submit">Search</button>
+                
+                {{#if searchQuery}}
+                    <a href="/patients/list" class="btn btn-outline-secondary ms-2">Clear</a>
+                {{/if}}
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive bg-white p-4 rounded shadow-sm border">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Age/Gender</th>
+                    <th>Disease</th>
+                    <th class="text-center">Visits</th>
+                    <th>Date Added</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each patients}}
+                <tr>
+                    <td>
+                        <span class="fw-bold text-primary">{{this.name}}</span>
+                        <br><small class="text-muted">{{this.mobile}}</small>
+                    </td>
+                    <td>{{this.age}} yrs / <span class="text-capitalize">{{this.gender}}</span></td>
+                    <td>
+                        <span class="badge bg-light text-danger border border-danger">
+                            {{this.disease}}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge rounded-pill bg-info text-dark px-3">
+                            {{#if this.visitCount}}{{this.visitCount}}{{else}}1{{/if}}
+                        </span>
+                    </td>
+                    <td><small>{{this.dateAdded}}</small></td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            <a href="/patients/patient-profile/{{this._id}}" class="btn btn-sm btn-outline-success">View</a>
+                            <a href="/patients/edit/{{this._id}}" class="btn btn-sm btn-outline-primary" title="Edit Record">
+                                Edit
+                            </a>
+                            <a href="/delete-patient/{{this._id}}" 
+                               class="btn btn-sm btn-outline-danger" 
+                               onclick="return confirm('Are you sure you want to delete {{this.name}}?')"
+                               title="Delete Patient">
+                                Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="6" class="text-center py-5">
+                        <div class="text-muted">
+                            <i class="bi bi-folder-x display-4"></i>
+                            <p class="mt-2 fs-5">No patient records found.</p>
+                            {{#if searchQuery}}
+                                <p>No results for "<strong>{{searchQuery}}</strong>". <a href="/patients/list">Show all</a></p>
+                            {{else}}
+                                <a href="/patients/add" class="btn btn-primary btn-sm">Add Your First Patient</a>
+                            {{/if}}
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h4 class="mb-0">🏥 HMS Staff Login</h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="/auth/login" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Username / Email</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter your username" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold">Sign In</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer bg-light text-center py-3">
+                <p class="mb-0 text-muted small">New staff member? <a href="/auth/signup" class="text-decoration-none fw-bold">Register Account</a></p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-3">
+            <a href="/" class="text-muted small text-decoration-none">← Back to Homepage</a>
+        </div>
+    </div>
+</div>

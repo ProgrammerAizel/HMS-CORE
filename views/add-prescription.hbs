@@ -1,0 +1,85 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/patients/doctor-panel" class="text-decoration-none">Doctor Panel</a></li>
+                    <li class="breadcrumb-item active">New Prescription</li>
+                </ol>
+            </nav>
+
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-primary py-3 px-4 border-0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="text-white">
+                            <h4 class="mb-1 fw-bold"><i class="bi bi-file-earmark-medical me-2"></i>New Visit Record</h4>
+                            <p class="mb-0 opacity-75 small">Filling prescription for <strong>{{patient.name}}</strong></p>
+                        </div>
+                        <div class="badge bg-white text-primary rounded-pill px-3 py-2">
+                            {{patient.age}} Yrs • {{patient.gender}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body p-4 bg-light bg-opacity-25">
+                    <form action="/patients/add-prescription/{{patient._id}}" method="POST">
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-secondary"><i class="bi bi-person-badge me-1"></i>Attending Physician</label>
+                            <input type="text" name="doctorName" class="form-control form-control-lg border-2" 
+                                   placeholder="Dr. Smith" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <label class="form-label fw-semibold text-secondary"><i class="bi bi-clipboard2-pulse me-1"></i>Clinical Diagnosis</label>
+                                <input type="text" name="diagnosis" class="form-control border-2" 
+                                       placeholder="e.g. Acute Bronchitis" required>
+                            </div>
+
+                            <div class="col-12 mb-4">
+                                <label class="form-label fw-semibold text-secondary"><i class="bi bi-capsule me-1"></i>Medicines & Instructions</label>
+                                <textarea name="medicines" class="form-control border-2" rows="5" 
+                                          placeholder="1. Paracetamol 500mg - Twice daily after meals&#10;2. Rest for 3 days"></textarea>
+                                <div class="form-text mt-2 italic text-muted">Include dosage, frequency, and duration.</div>
+                            </div>
+                            
+                            <div class="col-12 mb-4">
+                                <label class="form-label fw-semibold text-secondary"><i class="bi bi-chat-left-text me-1"></i>Doctor's Advice (Optional)</label>
+                                <input type="text" name="advice" class="form-control border-2" placeholder="e.g. Follow up in 1 week">
+                            </div>
+                        </div>
+
+                        <hr class="my-4 opacity-50">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="/patients/doctor-panel" class="btn btn-light border px-4 rounded-pill">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-4 rounded-pill shadow-sm">
+                                <i class="bi bi-check-circle me-1"></i> Save & Finish Visit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <p class="text-center mt-3 text-muted small">
+                <i class="bi bi-shield-lock me-1"></i> Secure Medical Record Entry
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+    }
+    .card {
+        background: #ffffff;
+    }
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "›";
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+</style>

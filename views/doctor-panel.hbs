@@ -1,0 +1,63 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-primary">Doctor Control Panel</h2>
+            <p class="text-muted">Manage your assigned patients and records</p>
+        </div>
+        
+        <div class="col-md-4">
+            <form action="/patients/search" method="GET" class="input-group shadow-sm">
+                <input 
+                    type="text" 
+                    name="query" 
+                    class="form-control" 
+                    placeholder="Search your patients..." 
+                    value="{{searchQuery}}"
+                >
+                <button class="btn btn-dark" type="submit">
+                    <i class="bi bi-search"></i> Search
+                </button>
+                {{#if searchQuery}}
+                    <a href="/patients/doctor-panel" class="btn btn-outline-danger">Reset</a>
+                {{/if}}
+            </form>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Status/Disease</th>
+                        <th>Last Visit</th>
+                        <th class="text-end">Management</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each patients}}
+                    <tr class="align-middle">
+                        <td><strong>{{this.name}}</strong><br><small class="text-muted">ID: {{this._id}}</small></td>
+                        <td><span class="badge rounded-pill bg-warning text-dark">{{this.disease}}</span></td>
+                        <td>{{this.dateAdded}}</td>
+                        <td class="text-end">
+                            <div class="btn-group">
+                                <a href="/patients/patient-profile/{{this._id}}" class="btn btn-outline-secondary">Open File</a>
+                                <a href="/patients/treat-patient/{{this._id}}" class="btn btn-outline-primary">add Presciption</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="4" class="text-center py-5 text-muted">
+                            <i class="bi bi-person-x-fill display-4"></i>
+                            <p class="mt-2">No matching patients found in your records.</p>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container mt-4">
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Patient Profile</h2>
+            <span class="badge bg-light text-primary fs-6">ID: {{patient._id}}</span>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Name:</strong> {{patient.name}}</p>
+                    <p><strong>Age:</strong> {{patient.age}}</p>
+                    <p><strong>Gender:</strong> {{patient.gender}}</p>
+                </div>
+                <div class="col-md-6 border-start">
+                    <p><strong>Mobile:</strong> {{patient.mobile}}</p>
+                    <p><strong>Primary Disease:</strong> <span class="text-danger fw-bold">{{patient.disease}}</span></p>
+                    <p><strong>Total Visits:</strong> <span class="badge bg-secondary">{{visitCount}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">Medical History & Prescriptions</h4>
+        </div>
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>Visit Date</th>
+                    <th>Diagnosis</th>
+                    <th>Doctor</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each prescriptions}}
+                <tr class="align-middle">
+                    <td>
+                        <a href="/patients/visit-details/{{this._id}}" class="text-decoration-none fw-bold text-primary">
+                            <i class="bi bi-calendar-event me-2"></i>{{this.date}}
+                        </a>
+                    </td>
+                    <td>{{this.diagnosis}}</td>
+                    <td>Dr. {{this.doctorName}}</td>
+                    <td class="text-end">
+                        <a href="/patients/visit-details/{{this._id}}" class="btn btn-sm btn-link">print prescription</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <div class="mt-4 text-center">
+        <a href="/patients/list" class="btn btn-secondary px-4">Back to Patient List</a>
+        <button onclick="window.print()" class="btn btn-outline-dark px-4 ms-2">Print Record</button>
+    </div>
+</div>
